@@ -6,10 +6,10 @@ import (
 )
 
 var meta = entities.Metadata{
-	CreatedAt:     time.Now(),
-	LastUpdatedAt: time.Now(),
-	CreatedBy:     "webapp",
-	LastUpdatedBy: "webapp",
+	CreatedAt: time.Now().String(),
+	UpdatedAt: time.Now().String(),
+	CreatedBy: "webapp",
+	UpdatedBy: "webapp",
 }
 
 var Data = []entities.User{

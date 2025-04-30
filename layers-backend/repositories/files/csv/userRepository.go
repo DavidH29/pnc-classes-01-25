@@ -10,6 +10,10 @@ import (
 
 type UserRepository struct{}
 
+func NewUserRepository() *UserRepository {
+	return &UserRepository{}
+}
+
 func (u UserRepository) GetAll() ([]entities.User, error) {
 	file, err := os.Open("data.csv")
 	if err != nil {
@@ -33,8 +37,8 @@ func (u UserRepository) GetAll() ([]entities.User, error) {
 		createdAt, _ := time.Parse(time.RFC3339, record[3])
 		updatedAt, _ := time.Parse(time.RFC3339, record[4])
 		meta := entities.Metadata{
-			CreatedAt: createdAt,
-			UpdatedAt: updatedAt,
+			CreatedAt: createdAt.String(),
+			UpdatedAt: updatedAt.String(),
 			CreatedBy: record[5],
 			UpdatedBy: record[6],
 		}
@@ -65,8 +69,8 @@ func (u UserRepository) GetById(id string) (entities.User, error) {
 			createdAt, _ := time.Parse(time.RFC3339, record[3])
 			updatedAt, _ := time.Parse(time.RFC3339, record[4])
 			meta := entities.Metadata{
-				CreatedAt: createdAt,
-				UpdatedAt: updatedAt,
+				CreatedAt: createdAt.String(),
+				UpdatedAt: updatedAt.String(),
 				CreatedBy: record[5],
 				UpdatedBy: record[6],
 			}
@@ -92,8 +96,8 @@ func (u UserRepository) Create(user entities.User) error {
 		user.Id(),
 		user.Name(),
 		user.Email(),
-		user.Metadata.CreatedAt.Format(time.RFC3339),
-		user.Metadata.UpdatedAt.Format(time.RFC3339),
+		user.Metadata.CreatedAt,
+		user.Metadata.UpdatedAt,
 		"webapp",
 		"webapp",
 	}
@@ -105,7 +109,7 @@ func (u UserRepository) Create(user entities.User) error {
 	return nil
 }
 
-func (u UserRepository) Update(id string, user entities.User) error {
+func (u UserRepository) Update(id, name, email string) error {
 	//TODO
 	return nil
 }

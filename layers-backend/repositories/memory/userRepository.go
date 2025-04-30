@@ -8,13 +8,18 @@ import (
 
 type UserRepository struct{}
 
+func NewUserRepository() *UserRepository {
+	return &UserRepository{}
+}
+
 func (u UserRepository) GetAll() ([]entities.User, error) {
-	return data.Data, nil
+	res := data.Data
+	return res, nil
 }
 
 func (u UserRepository) GetById(id string) (entities.User, error) {
 	for _, v := range data.Data {
-		if v.Id() == id {
+		if v.Id == id {
 			return v, nil
 		}
 	}
@@ -27,11 +32,11 @@ func (u UserRepository) Create(user entities.User) error {
 	return nil
 }
 
-func (u UserRepository) Update(id string, user entities.User) error {
+func (u UserRepository) Update(id, name, email string) error {
 	for i, v := range data.Data {
-		if v.Id() == id {
-			data.Data[i].SetName(user.Name())
-			data.Data[i].SetEmail(user.Email())
+		if v.Id == id {
+			data.Data[i].Name = name
+			data.Data[i].Email = email
 			return nil
 		}
 	}
