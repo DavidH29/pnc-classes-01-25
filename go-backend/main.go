@@ -29,6 +29,12 @@ func main() {
 		w.Write(response)
 	}).Methods(http.MethodGet)
 
+	router.HandleFunc("/user", func(w http.ResponseWriter, r *http.Request) {
+		var reqInfo User
+		json.NewDecoder(r.Body).Decode(&reqInfo)
+		data = append(data, reqInfo)
+	}).Methods(http.MethodPost)
+
 	http.ListenAndServe(":8080", router)
 
 }
