@@ -1,7 +1,7 @@
 package entities
 
 type User struct {
-	Id    string `json:"Id,omitempty"`
+	Id    string `json:"id,omitempty"`
 	Name  string `json:"name,omitempty"`
 	Email string `json:"email,omitempty"`
 	Metadata

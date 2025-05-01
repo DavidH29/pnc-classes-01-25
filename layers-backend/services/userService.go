@@ -63,6 +63,8 @@ func (u UserService) Create(user dto.CreateUser) error {
 	meta := entities.Metadata{
 		CreatedAt: time.Now().Format(time.RFC3339),
 		UpdatedAt: time.Now().Format(time.RFC3339),
+		CreatedBy: "webapp",
+		UpdatedBy: "webapp",
 	}
 	newUser := entities.NewUser(id.String(), user.Name, user.Email, meta)
 

@@ -15,7 +15,7 @@ func NewUserRepository() *UserRepository {
 }
 
 func (u UserRepository) GetAll() ([]entities.User, error) {
-	file, err := os.Open("data.csv")
+	file, err := os.Open(`C:\Users\david\OneDrive\Documents\catedras\ncapas-01-25\repo\layers-backend\data\data.csv`)
 	if err != nil {
 		return []entities.User{}, err
 	}
@@ -49,7 +49,7 @@ func (u UserRepository) GetAll() ([]entities.User, error) {
 }
 
 func (u UserRepository) GetById(id string) (entities.User, error) {
-	file, err := os.Open("data.csv")
+	file, err := os.Open("../../../data/data.csv")
 	if err != nil {
 		return entities.User{}, err
 	}
@@ -93,9 +93,9 @@ func (u UserRepository) Create(user entities.User) error {
 	defer writer.Flush()
 
 	newUser := []string{
-		user.Id(),
-		user.Name(),
-		user.Email(),
+		user.Id,
+		user.Name,
+		user.Email,
 		user.Metadata.CreatedAt,
 		user.Metadata.UpdatedAt,
 		"webapp",
