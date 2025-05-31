@@ -2,6 +2,7 @@ package com.twitter.demo.services;
 
 import com.twitter.demo.entities.User;
 import com.twitter.demo.entities.dto.RegisterDto;
+import com.twitter.demo.entities.dto.UserDto;
 import com.twitter.demo.repositories.UserRepository;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,15 @@ public class UserService {
 
     public List<User> getAllUsers(){
         return userRepository.findAll();
+    }
+
+    public UserDto getUserByEmail(String email){
+        Optional<User> optionalUser = userRepository.findUserByEmail(email);
+        if (optionalUser.isEmpty()){
+            throw new RuntimeException("User not found");
+        }
+        return new UserDto(optionalUser.get().getId(), optionalUser.get().getName(), optionalUser.get().getEmail());
+
     }
 
 

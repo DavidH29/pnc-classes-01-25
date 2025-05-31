@@ -3,6 +3,7 @@ package com.twitter.demo.controllers;
 import com.twitter.demo.entities.Post;
 import com.twitter.demo.entities.User;
 import com.twitter.demo.entities.dto.RegisterDto;
+import com.twitter.demo.entities.dto.UserDto;
 import com.twitter.demo.entities.dto.UserPostsDto;
 import com.twitter.demo.services.PostService;
 import com.twitter.demo.services.UserService;
@@ -49,6 +50,11 @@ public class UserController {
         } catch (Exception e){
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("users/email")
+    public ResponseEntity<UserDto> getUserByEmail(@RequestParam("email") String email){
+        return ResponseEntity.ok(userService.getUserByEmail(email));
     }
 
     @GetMapping("/users/{id}/posts")
